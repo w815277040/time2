@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定时闹钟</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    h1 {
+        color: #333;
+    }
+    #clock {
+        font-size: 3em;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<h1>定时闹钟</h1>
+<div>
+    <label for="alarm-time">设置闹钟时间：</label>
+    <input type="time" id="alarm-time">
+    <button onclick="setAlarm()">设置闹钟</button>
+</div>
+<div id="clock"></div>
+
+<script>
+    function setAlarm() {
+        const alarmTime = document.getElementById('alarm-time').value;
+        const now = new Date();
+        const alarm = new Date(now.toDateString() + ' ' + alarmTime);
+
+        const timeDiff = alarm - now;
+        if (timeDiff < 0) {
+            alert('请选择未来的时间！');
+            return;
+        }
+
+        setTimeout(() => {
+            alert('闹钟响了！');
+        }, timeDiff);
+
+        document.getElementById('clock').innerText = '闹钟已设置为：' + alarmTime;
+    }
+</script>
+</body>
+</html>
